@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtsinu17qylsv"]
+
+[ext_resource type="PackedScene" uid="uid://d3025ksqygls" path="res://Character.tscn" id="1_m87t8"]
+
+[node name="Scene" type="Node2D"]
+
+[node name="Character" parent="." instance=ExtResource("1_m87t8")]
+position = Vector2(118, 120)
+scale = Vector2(0.5, 0.5)
+centered = false
+region_enabled = true
