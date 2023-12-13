@@ -4,9 +4,13 @@
 
 [node name="Scene" type="Node2D"]
 
+[node name="Main" type="Camera2D" parent="."]
+position = Vector2(641, 361)
+
 [node name="Character" parent="." instance=ExtResource("1_n2ndd")]
-position = Vector2(118, 120)
+position = Vector2(557, 103)
 scale = Vector2(0.5, 0.5)
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
+metadata/CharacterName = "rei"

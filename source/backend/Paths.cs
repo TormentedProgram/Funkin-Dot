@@ -13,7 +13,7 @@ public enum AssetType
 
 public partial class Paths : Node
 {
-	public static string getPath(string path, AssetType assetType)
+	public static string getPath(string path, AssetType assetType = AssetType.TEXT)
 	{
 		string fullPath = $"res://assets/{path}";
 		fullPath = ProjectSettings.GlobalizePath(fullPath);
@@ -30,10 +30,6 @@ public partial class Paths : Node
 
 			case AssetType.ATLAS:
 				// Additional handling if needed
-				break;
-
-			default:
-				GD.PrintErr($"Unknown asset type: {assetType}");
 				break;
 		}
 		

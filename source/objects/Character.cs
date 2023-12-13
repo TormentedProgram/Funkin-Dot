@@ -1,24 +1,80 @@
 using Godot;
+
 using System.Collections.Generic;
 using System;
 
+using Newtonsoft.Json;
+
+public class CharacterAnimation
+{
+    public bool loop { get; set; }
+    public List<float> offsets { get; set; }
+    public string anim { get; set; }
+    public int fps { get; set; }
+    public string name { get; set; }
+    public List<int> indices { get; set; }
+}
+
+public class CharacterData
+{
+    public List<CharacterAnimation> animations { get; set; }
+    public bool no_antialiasing { get; set; }
+    public string image { get; set; }
+    public List<float> position { get; set; }
+    public string healthicon { get; set; }
+    public bool flip_x { get; set; }
+    public List<int> healthbar_colors { get; set; }
+    public List<float> camera_position { get; set; }
+    public double sing_duration { get; set; }
+    public double scale { get; set; }
+}
+
 public partial class Character : Sprite2D
 {
+    CharacterData character;
 	SparrowAnimation animation;
+    Vector2 currentPosition;
 
 	public override void _Ready()
 	{
-		animation = GetNode<Node>("Animation") as SparrowAnimation;
-		animation.setpath("pickleman");
+        string characterName = (String)GetMeta("CharacterName");
 
-		animation.create("idle","pickleman idle", 24, true);
-		animation.create("up","pickleman up", 24, false);
-		animation.create("down","pickleman down", 24, false);
-		animation.create("left","pickleman left", 24, false);
-		animation.create("right","pickleman right", 24, false);
+        character = loadCharacter(characterName);
+        currentPosition = Position;
 
-		animation.play("idle");
+        animation = GetNode<Node>("Animation") as SparrowAnimation;
+		animation.setpath(character.image);
+
+        foreach (CharacterAnimation json in character.animations) {
+            animation.create(json.anim, json.name, json.fps, json.loop);
+        }
+
+        playAnim("idle");
 	}
+
+    public void playAnim(string anim) {
+        CharacterAnimation animdata = getAnimationData(character, anim);
+
+        float width = RegionRect.Size.X;
+        float height = RegionRect.Size.Y;
+        Vector2 haxePosition = new Vector2(animdata.offsets[0], animdata.offsets[1]);
+
+        animation.play(anim);
+
+        Position = new Vector2(currentPosition.X + haxePosition.X, currentPosition.Y + haxePosition.Y);
+    }
+
+    public static CharacterData loadCharacter(string charName) {
+        string path = Paths.getPath("characters/" + charName + ".json");
+        string jsonString = System.IO.File.ReadAllText(path);
+        CharacterData charData = JsonConvert.DeserializeObject<CharacterData>(jsonString);
+        return charData;
+    }
+
+    public static CharacterAnimation getAnimationData(CharacterData data, string anim) {
+        CharacterAnimation animation = data.animations.Find(a => a.anim == anim);
+        return animation;
+    }
 
 	public override void _Process(double delta)
     {
@@ -30,28 +86,28 @@ public partial class Character : Sprite2D
                 case "game_up":
                     if (Input.IsActionJustPressed(action))
                     {
-                        animation.play("up");
+                        playAnim("singUP");
                     }
                     break;
 
                 case "game_left":
                     if (Input.IsActionJustPressed(action))
                     {
-                        animation.play("left");
+                        playAnim("singLEFT");
                     }
                     break;
 
                 case "game_down":
                     if (Input.IsActionJustPressed(action))
                     {
-                        animation.play("down");
+                        playAnim("singDOWN");
                     }
                     break;
 
                 case "game_right":
                     if (Input.IsActionJustPressed(action))
                     {
-                        animation.play("right");
+                        playAnim("singRIGHT");
                     }
                     break;
 
