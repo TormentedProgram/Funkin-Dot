@@ -23,9 +23,8 @@ public partial class SparrowAnimation : Node
 
     public void setpath(string path)
     {
-        allRects = SparrowParser.ParseAsset(path);
-		Sprite2D sprite = GetOwner<Sprite2D>();
-		sprite.Texture = (Texture2D)GD.Load($"res://{path}.png");
+        allRects = SparrowParser.ParseAsset(Paths.atlas("characters/" + path));
+		GetOwner<Sprite2D>().Texture = Paths.image("characters/" + path);
     }
 
     public void create(string tag, string animName, float fps, bool loop)
@@ -99,22 +98,19 @@ public partial class SparrowAnimation : Node
 		}
 		else
 		{
-			if (currentData.loop)
+			if (currentRectIndex >= currentRects.Count)
 			{
-				// Reset the index to loop
-				currentRectIndex = 0;
-				// Update the sprite's RegionRect with the current frame
-				sprite.RegionRect = currentRects[currentRectIndex].rect;
-				sprite.Offset = currentRects[currentRectIndex].offset;
-				// Move to the next frame
-				currentRectIndex++;
-				// Restart the timer for the next frame
-				animationTimer.Start();
-			}
-			else
-			{
-				// Animation has finished
-				animationTimer.Stop();
+				if (currentData.loop)
+				{
+					// Reset the index to loop
+					currentRectIndex = 0;
+				}
+				else
+				{
+					// Animation has finished
+					animationTimer.Stop();
+					return;
+				}
 			}
 		}
 	}

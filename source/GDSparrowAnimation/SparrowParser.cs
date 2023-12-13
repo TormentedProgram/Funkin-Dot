@@ -8,8 +8,16 @@ public class SparrowParser
     public static List<SpriteMeta> ParseAsset(string dapath, bool forcePivotOverwrite = false)
     {
 		Vector2 inputPivot = Vector2.Zero;
-		string path = ProjectSettings.GlobalizePath("res://" + dapath);
-		Texture2D asset = (Texture2D)GD.Load(path + ".png");
+		string path = ProjectSettings.GlobalizePath(dapath);
+        Texture2D asset = (Texture2D)GD.Load(path + ".png");
+
+        string xmlPath = path + ".xml";
+        if (!System.IO.File.Exists(xmlPath))
+        {
+            GD.PrintErr($"XML file not found: {xmlPath}");
+            return loadDefault(asset); // Return default SpriteMeta list
+        }
+
 		string xmlString = System.IO.File.ReadAllText(path + ".xml");
 
         XmlDocument doc = new XmlDocument();
@@ -97,6 +105,22 @@ public class SparrowParser
         }
 
         return null;
+    }
+
+    private static List<SpriteMeta> loadDefault(Texture2D texture)
+    {
+        // You can define your default SpriteMeta here
+        Vector2 textureSize = texture.GetSize();
+        SpriteMeta defaultSprite = new SpriteMeta
+        {
+            name = "DefaultSprite",
+            rect = new Rect2(Vector2.Zero, textureSize), // Set default dimensions
+            pivot = new Vector2(0.5f, 0.5f), // Set default pivot
+            offset = Vector2.Zero,
+            alignment = 9 // Set default alignment
+        };
+
+        return new List<SpriteMeta> { defaultSprite };
     }
 
     private static float GetFloatAttribute(XmlNode node, string name, float defaultValue = 0)
