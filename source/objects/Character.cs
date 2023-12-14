@@ -33,7 +33,9 @@ public partial class Character : Sprite2D
 {
     CharacterData character;
 	SparrowAnimation animation;
+
     Vector2 startingPosition;
+    float startingScale = 1;
 
 	public override void _Ready()
 	{
@@ -49,10 +51,12 @@ public partial class Character : Sprite2D
             animation.create(json.anim, json.name, json.fps, json.loop);
         }
 
+        startingScale = Scale.X;
         FlipH = character.flip_x;
 
         float jsonScale = (float)character.scale;
         Scale = new Vector2(Scale.X * jsonScale, Scale.Y * jsonScale);
+
         playAnim("idle");
 	}
 
@@ -61,6 +65,9 @@ public partial class Character : Sprite2D
 
         Vector2 haxeOffsets = new Vector2(animdata.offsets[0], animdata.offsets[1]);
         animation.play(anim);
+
+        haxeOffsets.X *= startingScale;
+        haxeOffsets.Y *= startingScale;
 
         Position = new Vector2(startingPosition.X - haxeOffsets.X, startingPosition.Y - haxeOffsets.Y);
     }
