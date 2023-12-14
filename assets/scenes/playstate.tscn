@@ -1,23 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtsinu17qylsv"]
+[gd_scene load_steps=3 format=3 uid="uid://dtsinu17qylsv"]
 
 [ext_resource type="PackedScene" uid="uid://d3025ksqygls" path="res://assets/objects/Character.tscn" id="1_n2ndd"]
+[ext_resource type="Texture2D" uid="uid://bx5kfq5d16rbm" path="res://assets/images/Example.png" id="2_t37r2"]
 
 [node name="Scene" type="Node2D"]
 
 [node name="Main" type="Camera2D" parent="."]
 position = Vector2(641, 361)
-zoom = Vector2(0.7, 0.7)
 
 [node name="Dad" parent="." instance=ExtResource("1_n2ndd")]
-position = Vector2(117, 128)
+position = Vector2(108, -16)
+texture = ExtResource("2_t37r2")
 centered = false
-region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 metadata/CharacterName = "rei"
 
 [node name="Boyfriend" parent="." instance=ExtResource("1_n2ndd")]
-position = Vector2(951, 123)
+position = Vector2(777, 317)
+texture = ExtResource("2_t37r2")
 centered = false
-region_enabled = true
+flip_h = true
 region_rect = Rect2(0, 0, 128, 128)
 metadata/CharacterName = "bf"
