@@ -32,14 +32,17 @@ public class CharacterData
 public partial class Character : Sprite2D
 {
     CharacterData character;
-	SparrowAnimation animation;
+	public SparrowAnimation animation;
 
     Vector2 startingPosition;
     float startingScale = 1;
 
+    bool isPlayer = false;
+
 	public override void _Ready()
 	{
         string characterName = (String)GetMeta("CharacterName");
+        isPlayer = (bool)GetMeta("isPlayer");
 
         character = loadCharacter(characterName);
         startingPosition = Position;
@@ -52,7 +55,9 @@ public partial class Character : Sprite2D
         }
 
         startingScale = Scale.X;
+
         FlipH = character.flip_x;
+        if (isPlayer) FlipH = !FlipH;
 
         float jsonScale = (float)character.scale;
         Scale = new Vector2(Scale.X * jsonScale, Scale.Y * jsonScale);

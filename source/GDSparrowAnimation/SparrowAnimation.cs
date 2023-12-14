@@ -13,6 +13,9 @@ public partial class SparrowAnimation : Node
     public List<SpriteMeta> allRects;
     public List<DynamicAnimationData> allData = new List<DynamicAnimationData>();
 
+    public string curAnim;
+    public bool finished = false;
+
     // Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -61,6 +64,8 @@ public partial class SparrowAnimation : Node
 			currentRectIndex = 0;
 
 			// Trigger the first frame
+            finished = false;
+            curAnim = tag;
 			_OnAnimationTimerTimeout();  // Call the method directly here
 		}
 		else
@@ -108,6 +113,7 @@ public partial class SparrowAnimation : Node
 				else
 				{
 					// Animation has finished
+                    finished = true;
 					animationTimer.Stop();
 					return;
 				}
