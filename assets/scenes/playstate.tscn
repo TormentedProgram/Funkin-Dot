@@ -6,11 +6,18 @@
 
 [node name="Main" type="Camera2D" parent="."]
 position = Vector2(641, 361)
+zoom = Vector2(0.7, 0.7)
 
-[node name="Character" parent="." instance=ExtResource("1_n2ndd")]
-position = Vector2(557, 103)
-scale = Vector2(0.5, 0.5)
+[node name="Dad" parent="." instance=ExtResource("1_n2ndd")]
+position = Vector2(117, 128)
 centered = false
 region_enabled = true
 region_rect = Rect2(0, 0, 128, 128)
 metadata/CharacterName = "rei"
+
+[node name="Boyfriend" parent="." instance=ExtResource("1_n2ndd")]
+position = Vector2(951, 123)
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 128, 128)
+metadata/CharacterName = "bf"

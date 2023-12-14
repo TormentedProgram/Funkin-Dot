@@ -33,14 +33,14 @@ public partial class Character : Sprite2D
 {
     CharacterData character;
 	SparrowAnimation animation;
-    Vector2 currentPosition;
+    Vector2 startingPosition;
 
 	public override void _Ready()
 	{
         string characterName = (String)GetMeta("CharacterName");
 
         character = loadCharacter(characterName);
-        currentPosition = Position;
+        startingPosition = Position;
 
         animation = GetNode<Node>("Animation") as SparrowAnimation;
 		animation.setpath(character.image);
@@ -49,19 +49,20 @@ public partial class Character : Sprite2D
             animation.create(json.anim, json.name, json.fps, json.loop);
         }
 
+        FlipH = character.flip_x;
+
+        float jsonScale = (float)character.scale;
+        Scale = new Vector2(Scale.X * jsonScale, Scale.Y * jsonScale);
         playAnim("idle");
 	}
 
     public void playAnim(string anim) {
         CharacterAnimation animdata = getAnimationData(character, anim);
 
-        float width = RegionRect.Size.X;
-        float height = RegionRect.Size.Y;
-        Vector2 haxePosition = new Vector2(animdata.offsets[0], animdata.offsets[1]);
-
+        Vector2 haxeOffsets = new Vector2(animdata.offsets[0], animdata.offsets[1]);
         animation.play(anim);
 
-        Position = new Vector2(currentPosition.X + haxePosition.X, currentPosition.Y + haxePosition.Y);
+        Position = new Vector2(startingPosition.X - haxeOffsets.X, startingPosition.Y - haxeOffsets.Y);
     }
 
     public static CharacterData loadCharacter(string charName) {
