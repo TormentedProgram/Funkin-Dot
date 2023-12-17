@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtsinu17qylsv"]
+[gd_scene load_steps=4 format=3 uid="uid://dtsinu17qylsv"]
 
 [ext_resource type="PackedScene" uid="uid://d3025ksqygls" path="res://assets/objects/Character.tscn" id="1_n2ndd"]
 [ext_resource type="Texture2D" uid="uid://bx5kfq5d16rbm" path="res://assets/images/Example.png" id="2_t37r2"]
+[ext_resource type="PackedScene" uid="uid://vjt5k7pcp62i" path="res://assets/objects/Playfield.tscn" id="3_boiai"]
 
 [node name="Scene" type="Node2D"]
 
@@ -24,3 +25,6 @@ flip_h = true
 region_rect = Rect2(0, 0, 128, 128)
 metadata/CharacterName = "bf"
 metadata/isPlayer = true
+
+[node name="Playfield" parent="." instance=ExtResource("3_boiai")]
+position = Vector2(642, 360)

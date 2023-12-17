@@ -27,7 +27,7 @@ public partial class SparrowAnimation : Node
     public void setpath(string path)
     {
         allRects = SparrowParser.ParseAsset(Paths.atlas(path));
-		GetOwner<Sprite2D>().Texture = Paths.image(path);
+		GetParent<Sprite2D>().Texture = Paths.image(path);
     }
 
     public void create(string tag, string animName, float fps, bool loop)
@@ -84,7 +84,7 @@ public partial class SparrowAnimation : Node
 	private void _OnAnimationTimerTimeout()
 	{
 		List<SpriteMeta> currentRects = currentData.animRects;
-		Sprite2D sprite = GetOwner<Sprite2D>();
+		Sprite2D sprite = GetParent<Sprite2D>();
 
 		// Check if there are more frames to display
 		if (currentRectIndex < currentRects.Count)
