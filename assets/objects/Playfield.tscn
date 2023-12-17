@@ -1,16 +1,39 @@
 [gd_scene load_steps=4 format=3 uid="uid://vjt5k7pcp62i"]
 
-[ext_resource type="Script" path="res://assets/objects/Strumline.cs" id="1_3qqye"]
+[ext_resource type="Script" path="res://source/objects/Strumline.cs" id="1_b7gdx"]
 [ext_resource type="Script" path="res://source/GDSparrowAnimation/SparrowAnimation.cs" id="1_o5a5r"]
 [ext_resource type="Texture2D" uid="uid://bmese61be3qen" path="res://art/godot/godot.png" id="2_p1fws"]
 
 [node name="Playfield" type="Node2D"]
 
 [node name="Strumline" type="Node2D" parent="."]
-script = ExtResource("1_3qqye")
+script = ExtResource("1_b7gdx")
 
 [node name="Strum_0" type="Sprite2D" parent="Strumline"]
 texture = ExtResource("2_p1fws")
 
 [node name="Animation" type="Node" parent="Strumline/Strum_0"]
 script = ExtResource("1_o5a5r")
+
+[node name="Strum_1" type="Sprite2D" parent="Strumline"]
+position = Vector2(177, 0)
+texture = ExtResource("2_p1fws")
+
+[node name="Animation" type="Node" parent="Strumline/Strum_1"]
+script = ExtResource("1_o5a5r")
+
+[node name="Strum_2" type="Sprite2D" parent="Strumline"]
+position = Vector2(352, -1)
+texture = ExtResource("2_p1fws")
+
+[node name="Animation" type="Node" parent="Strumline/Strum_2"]
+script = ExtResource("1_o5a5r")
+
+[node name="Strum_3" type="Sprite2D" parent="Strumline"]
+position = Vector2(531, -4)
+texture = ExtResource("2_p1fws")
+
+[node name="Animation" type="Node" parent="Strumline/Strum_3"]
+script = ExtResource("1_o5a5r")
+
+[node name="Notes" type="Node2D" parent="."]

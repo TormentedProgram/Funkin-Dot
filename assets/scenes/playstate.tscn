@@ -6,9 +6,6 @@
 
 [node name="Scene" type="Node2D"]
 
-[node name="Main" type="Camera2D" parent="."]
-position = Vector2(641, 361)
-
 [node name="Dad" parent="." instance=ExtResource("1_n2ndd")]
 position = Vector2(108, -16)
 texture = ExtResource("2_t37r2")
@@ -26,5 +23,19 @@ region_rect = Rect2(0, 0, 128, 128)
 metadata/CharacterName = "bf"
 metadata/isPlayer = true
 
-[node name="Playfield" parent="." instance=ExtResource("3_boiai")]
-position = Vector2(642, 360)
+[node name="Main" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="camHUD" type="Control" parent="Main"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Playfield" parent="Main/camHUD" instance=ExtResource("3_boiai")]
+position = Vector2(53, -356)
+scale = Vector2(0.8, 0.8)
+
+[node name="Playfield2" parent="Main/camHUD" instance=ExtResource("3_boiai")]
+position = Vector2(-661, -356)
+scale = Vector2(0.8, 0.8)
