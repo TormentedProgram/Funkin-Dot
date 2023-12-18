@@ -3,13 +3,13 @@ using System;
 
 public partial class CoolUtil : Node
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+    public static float formatAccuracy(float input) {
+        float roundedValue = Mathf.Round(input * 10000) / 10000f;
+        return Mathf.Clamp(roundedValue * 100, 0f, 100f);
+    }
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+    public static float BoundTo(float value, float min, float max)
+    {
+        return Mathf.Max(min, Mathf.Min(max, value));
+    }
 }

@@ -18,7 +18,6 @@ public partial class Strumline : Node2D
 {
     List<strumClass> currentStrums = new List<strumClass>(); 
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
         foreach (Sprite2D child in GetChildren())
@@ -29,6 +28,9 @@ public partial class Strumline : Node2D
             if (name.Contains("strum")) {
                 int number = Convert.ToInt32(name.Split("_")[1]);
 
+                SparrowAnimation strumAnimation = child.GetNode<Node>("Animation") as SparrowAnimation;
+                strumAnimation.setpath("NOTE_assets");
+
                 strumClass newStrum = new strumClass(child, number);
                 currentStrums.Add(newStrum);
             }
@@ -37,13 +39,29 @@ public partial class Strumline : Node2D
         foreach (strumClass _class in currentStrums) {
             Sprite2D child = _class.Sprite;
             SparrowAnimation strumAnimation = child.GetNode<Node>("Animation") as SparrowAnimation;
-            strumAnimation.setpath("NOTE_assets");
-            strumAnimation.create("idle", "left confirm", 24, true);
-            strumAnimation.play("idle");
+
+            strumAnimation.create("left confirm", "left confirm", 24, false);
+            strumAnimation.create("right confirm", "right confirm", 24, false);
+            strumAnimation.create("up confirm", "up confirm", 24, false);
+            strumAnimation.create("down confirm", "down confirm", 24, false);
+
+            strumAnimation.play("down confirm");
         }
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+    public void playAnim(int strumNumber, string animation) {
+        strumClass daStrum = null;
+        foreach (strumClass _class in currentStrums) {
+            if (_class.strumNumber == strumNumber) {
+                daStrum = _class;
+            }
+        }
+        if (daStrum != null) {
+            SparrowAnimation strum = daStrum.Sprite.GetNode<Node>("Animation") as SparrowAnimation;
+            strum.play(animation);
+        }
+    }
+
 	public override void _Process(double delta)
 	{
 	}
