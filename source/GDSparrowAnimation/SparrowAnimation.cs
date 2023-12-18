@@ -32,7 +32,7 @@ public partial class SparrowAnimation : Node
 
     public void create(string tag, string animName, float fps, bool loop)
     {
-        List<SpriteMeta> currentRects = allRects
+        currentRects = allRects
             .Where(spriteMeta => spriteMeta.name.Contains(animName))
             .ToList();
 
