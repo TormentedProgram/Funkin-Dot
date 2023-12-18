@@ -34,11 +34,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="BoyfriendPlayfield" parent="Main/camHUD" instance=ExtResource("3_boiai")]
-position = Vector2(53, -356)
+position = Vector2(148, -275)
 scale = Vector2(0.8, 0.8)
 
 [node name="DadPlayfield" parent="Main/camHUD" instance=ExtResource("3_boiai")]
-position = Vector2(-661, -356)
+position = Vector2(-566, -275)
 scale = Vector2(0.8, 0.8)
 
 [node name="Scripts" type="Node" parent="."]

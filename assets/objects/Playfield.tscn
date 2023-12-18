@@ -11,27 +11,31 @@ script = ExtResource("1_b7gdx")
 
 [node name="Strum_0" type="Sprite2D" parent="Strumline"]
 texture = ExtResource("2_p1fws")
+centered = false
 
 [node name="Animation" type="Node" parent="Strumline/Strum_0"]
 script = ExtResource("1_o5a5r")
 
 [node name="Strum_1" type="Sprite2D" parent="Strumline"]
-position = Vector2(177, 0)
+position = Vector2(161, 0)
 texture = ExtResource("2_p1fws")
+centered = false
 
 [node name="Animation" type="Node" parent="Strumline/Strum_1"]
 script = ExtResource("1_o5a5r")
 
 [node name="Strum_2" type="Sprite2D" parent="Strumline"]
-position = Vector2(352, -1)
+position = Vector2(319, 0)
 texture = ExtResource("2_p1fws")
+centered = false
 
 [node name="Animation" type="Node" parent="Strumline/Strum_2"]
 script = ExtResource("1_o5a5r")
 
 [node name="Strum_3" type="Sprite2D" parent="Strumline"]
-position = Vector2(531, -4)
+position = Vector2(480, -2)
 texture = ExtResource("2_p1fws")
+centered = false
 
 [node name="Animation" type="Node" parent="Strumline/Strum_3"]
 script = ExtResource("1_o5a5r")

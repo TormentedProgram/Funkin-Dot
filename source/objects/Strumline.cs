@@ -16,6 +16,7 @@ public class strumClass {
 
 public partial class Strumline : Node2D
 {
+    private List<string> corresDir = new List<string> { "LEFT", "DOWN", "UP", "RIGHT" };
     List<strumClass> currentStrums = new List<strumClass>(); 
 
 	public override void _Ready()
@@ -40,12 +41,17 @@ public partial class Strumline : Node2D
             Sprite2D child = _class.Sprite;
             SparrowAnimation strumAnimation = child.GetNode<Node>("Animation") as SparrowAnimation;
 
-            strumAnimation.create("left confirm", "left confirm", 24, false);
-            strumAnimation.create("right confirm", "right confirm", 24, false);
-            strumAnimation.create("up confirm", "up confirm", 24, false);
-            strumAnimation.create("down confirm", "down confirm", 24, false);
+            for (int i = 0; i <= 3; i++) {
+                strumAnimation.create($"press{corresDir[i]}", $"{corresDir[i].ToLower()} press", 24, false);
+                strumAnimation.create($"confirm{corresDir[i]}", $"{corresDir[i].ToLower()} confirm", 24, false);
+                strumAnimation.create($"arrow{corresDir[i]}", $"arrow{corresDir[i]}", 24, false);
+            }
 
-            strumAnimation.play("down confirm");
+            strumAnimation.centerOffsets();
+        }
+
+        for (int i = 0; i <= 3; i++) {
+            playAnim(i, $"arrow{corresDir[i]}");
         }
 	}
 
@@ -63,6 +69,22 @@ public partial class Strumline : Node2D
     }
 
 	public override void _Process(double delta)
-	{
-	}
+    {
+        // Check if the "game_up" input is pressed
+        foreach (string action in InputMap.GetActions())
+        {
+            for (int i = 0; i <= 3; i++) {
+                string lowerdir = corresDir[i];
+                lowerdir = lowerdir.ToLower();
+                if (action == $"game_{lowerdir}"){ 
+                    if (Input.IsActionJustPressed(action)) {
+                        playAnim(i, $"press{corresDir[i]}");
+                    }
+                    if (Input.IsActionJustReleased(action)) {
+                        playAnim(i, $"arrow{corresDir[i]}");
+                    }
+                }
+            }
+		}
+    }
 }

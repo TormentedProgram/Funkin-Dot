@@ -45,6 +45,12 @@ public partial class SparrowAnimation : Node
         allData.Add(newAnim);
     }
 
+    public void centerOffsets() {
+        foreach(DynamicAnimationData data in allData) {
+            data.centerOffsets();
+        }
+    }
+
 	public void play(string tag)
 	{
 		DynamicAnimationData data = GetAnimationData(tag);
@@ -52,6 +58,7 @@ public partial class SparrowAnimation : Node
 		if (data != null)
 		{
 			currentData = data;
+
 			float fps = data.fps;
 			float frameDuration = 1.0f / fps;
 
@@ -90,7 +97,7 @@ public partial class SparrowAnimation : Node
 		if (currentRectIndex < currentRects.Count)
 		{
 			// Update the sprite's RegionRect with the current frame
-			sprite.Centered = false;
+            sprite.Centered = false;
 			sprite.RegionEnabled = true;
 			sprite.RegionRect = currentRects[currentRectIndex].rect;
 			sprite.Offset = currentRects[currentRectIndex].offset;
@@ -128,4 +135,25 @@ public class DynamicAnimationData {
 	public float fps = 24;
 	public bool loop = false;
 	public List<SpriteMeta> animRects;
+
+    public void centerOffsets()
+    {
+        if (animRects.Count > 0)
+        {
+            Vector2 centerOffset = -animRects[0].rect.Size / 2.0f;
+
+            foreach (var rect in animRects)
+            {
+                centerOffset = centerOffset.Lerp(-rect.rect.Size / 2.0f, 0.5f);
+            }
+
+            // Calculate the total offset to apply
+            Vector2 totalOffset = centerOffset - animRects[0].offset;
+
+            foreach (var rect in animRects)
+            {
+                rect.offset += totalOffset;
+            }
+        }
+    }
 }
