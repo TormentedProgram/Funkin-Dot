@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtsinu17qylsv"]
 
 [ext_resource type="PackedScene" uid="uid://d3025ksqygls" path="res://assets/objects/Character.tscn" id="1_n2ndd"]
-[ext_resource type="Texture2D" uid="uid://bx5kfq5d16rbm" path="res://assets/images/Example.png" id="2_t37r2"]
+[ext_resource type="Texture2D" uid="uid://bx5kfq5d16rbm" path="res://assets/images/example.png" id="2_t37r2"]
 [ext_resource type="PackedScene" uid="uid://vjt5k7pcp62i" path="res://assets/objects/Playfield.tscn" id="3_boiai"]
 [ext_resource type="Script" path="res://source/backend/PlayState.cs" id="4_2o22s"]
 
@@ -34,11 +34,11 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="BoyfriendPlayfield" parent="Main/camHUD" instance=ExtResource("3_boiai")]
-position = Vector2(148, -275)
+position = Vector2(165, -274)
 scale = Vector2(0.8, 0.8)
 
 [node name="DadPlayfield" parent="Main/camHUD" instance=ExtResource("3_boiai")]
-position = Vector2(-566, -275)
+position = Vector2(-549, -274)
 scale = Vector2(0.8, 0.8)
 
 [node name="Scripts" type="Node" parent="."]
