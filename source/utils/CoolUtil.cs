@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public partial class CoolUtil : Node
 {
     public static float formatAccuracy(float input) {

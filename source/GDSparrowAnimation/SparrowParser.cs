@@ -1,7 +1,7 @@
-using Godot;
+
 using System.Collections.Generic;
 using System.Xml;
-using System;
+
 
 public class SparrowParser
 {

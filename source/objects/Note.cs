@@ -1,5 +1,5 @@
-using Godot;
-using System;
+
+
 
 public class arrowClass {
 	public Sprite2D Sprite { get; set; }

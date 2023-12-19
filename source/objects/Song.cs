@@ -1,9 +1,4 @@
-using Godot;
-
-using System;
-using System.Collections.Generic;
-
-using Newtonsoft.Json;
+using static JsonUtil;
 
 public partial class Song : Node
 {
@@ -22,7 +17,7 @@ public partial class Song : Node
 
 	public static SwagSong loadFromJson(string _path)
     {
-		string path = EngineUtil.formatPath(_path);
+		string path = formatPath(_path);
 
         if (!System.IO.File.Exists(path))
         {
@@ -32,16 +27,17 @@ public partial class Song : Node
         }
 
 		string rawJson = System.IO.File.ReadAllText(path);
+        rawJson = formatJson(rawJson);
         
         while (!rawJson.EndsWith("}"))
         {
             rawJson = rawJson.Substring(0, rawJson.Length - 1);
         }
         
-        return parseJSONshit(rawJson);;
+        return parseJson(fetchObject(rawJson, "song"));
     }
 
-	public static SwagSong parseJSONshit(string rawJson)
+	public static SwagSong parseJson(string rawJson)
     {
 		SwagSong swagShit = JsonConvert.DeserializeObject<SwagSong>(rawJson);
         swagShit.validScore = true;
