@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cyawasbum5fnm"]
+
+[node name="Arrow" type="Sprite2D"]
+position = Vector2(580, 431)

@@ -8,7 +8,7 @@ public class SparrowParser
     public static List<SpriteMeta> ParseAsset(string dapath, bool forcePivotOverwrite = false)
     {
 		Vector2 inputPivot = Vector2.Zero;
-		string path = ProjectSettings.GlobalizePath(dapath);
+		string path = EngineUtil.formatPath(dapath);
         Texture2D asset = (Texture2D)GD.Load(path + ".png");
 
         string xmlPath = path + ".xml";

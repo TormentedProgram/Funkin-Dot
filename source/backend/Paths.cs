@@ -27,20 +27,18 @@ public partial class Paths : Node
 					fullPath = "res://assets/images/godot.png"; // fallback image
 				}
 				break;
-
-			case AssetType.ATLAS:
-				// Additional handling if needed
-				break;
 		}
 		
 		return fullPath;
 	}
 
-
-
 	public static Texture2D image(string path) {
 		Texture2D bitmap = (Texture2D)GD.Load(getPath($"images/{path}.png", AssetType.IMAGE));
 		return bitmap;
+	}
+
+	public static string json(string path) {
+		return getPath($"songs/{path}.json",AssetType.TEXT);
 	}
 
 	public static string atlas(string path) {

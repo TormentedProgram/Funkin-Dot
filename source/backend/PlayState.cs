@@ -3,10 +3,12 @@ using System;
 
 public partial class PlayState : MusicBeatState
 {
+	SwagSong SONG;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
         Input.MouseMode = Input.MouseModeEnum.Hidden;
+		SONG = Song.loadFromJson(Paths.json("test/chart"));
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
