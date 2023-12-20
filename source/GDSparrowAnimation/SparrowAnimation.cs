@@ -1,8 +1,4 @@
 
-
-using System.Collections.Generic;
-using System.Linq;
-
 public partial class SparrowAnimation : Node
 {
     private Timer animationTimer;

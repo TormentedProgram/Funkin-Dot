@@ -5,28 +5,24 @@ using System.Xml;
 
 public class SparrowParser
 {
-    public static List<SpriteMeta> ParseAsset(string dapath, bool forcePivotOverwrite = false)
+    public static List<SpriteMeta> ParseAsset(string _path)
     {
-		Vector2 inputPivot = Vector2.Zero;
-		string path = EngineUtil.formatPath(dapath);
-        Texture2D asset = (Texture2D)GD.Load(path + ".png");
+        var formattedPath = formatPath(_path);
+        Texture2D asset = GD.Load(_path + ".png") as Texture2D;
 
-        string xmlPath = path + ".xml";
-        if (!System.IO.File.Exists(xmlPath))
+        if (!File.Exists(formattedPath + ".xml"))
         {
-            GD.PrintErr($"XML file not found: {xmlPath}");
-            return loadDefault(asset); // Return default SpriteMeta list
+            GD.PrintErr($"XML file not found: {formattedPath}.xml");
+            return loadDefault(asset);
         }
 
-		string xmlString = System.IO.File.ReadAllText(path + ".xml");
+		string xmlString = File.ReadAllText(formattedPath + ".xml");
 
         XmlDocument doc = new XmlDocument();
         doc.LoadXml(xmlString);
 
         XmlNodeList subTextures = doc.SelectNodes("//SubTexture");
         List<SpriteMeta> spriteSheet = new List<SpriteMeta>();
-
-        Vector2 pivotPixels;
 
         foreach (XmlNode node in subTextures)
         {
@@ -36,39 +32,6 @@ public class SparrowParser
             float y = GetFloatAttribute(node, "y");
             float width = GetFloatAttribute(node, "width");
             float height = GetFloatAttribute(node, "height");
-            pivotPixels.X = inputPivot.X * width;
-            pivotPixels.Y = inputPivot.Y * height;
-
-            if (!forcePivotOverwrite && (HasAttribute(node, "pivotX") || HasAttribute(node, "pivotY")))
-            {
-                pivotPixels.X = GetFloatAttribute(node, "pivotX");
-                pivotPixels.Y = GetFloatAttribute(node, "pivotY");
-                float frameWidth = GetFloatAttribute(node, "frameWidth");
-                float frameHeight = GetFloatAttribute(node, "frameHeight");
-
-                if (frameWidth != 0)
-                    inputPivot.X = pivotPixels.X / frameWidth;
-                else if (width != 0)
-                    inputPivot.X = pivotPixels.X / width;
-
-                if (frameHeight != 0)
-                {
-                    inputPivot.Y = 1 - pivotPixels.Y / frameHeight;
-                    pivotPixels.Y = frameHeight - inputPivot.Y; // flip pivot
-                }
-                else if (height != 0)
-                {
-                    inputPivot.Y = 1 - pivotPixels.Y / height;
-                    pivotPixels.Y = height - pivotPixels.Y; // flip pivot
-                }
-            }
-
-            Vector2 spritePivot = new Vector2(pivotPixels.X / width, pivotPixels.Y / height);
-
-            if (float.IsNaN(spritePivot.X) || float.IsNaN(spritePivot.Y))
-            {
-                spritePivot = Vector2.Zero;
-            }
 
             if (width < 0 || height < 0)
             {
@@ -78,7 +41,6 @@ public class SparrowParser
 
             SpriteMeta smd = new SpriteMeta();
             smd.name = name;
-            smd.pivot = spritePivot;
             smd.alignment = 9;
 
             float frameX = 0;
@@ -115,7 +77,6 @@ public class SparrowParser
         {
             name = "DefaultSprite",
             rect = new Rect2(Vector2.Zero, textureSize), // Set default dimensions
-            pivot = new Vector2(0.5f, 0.5f), // Set default pivot
             offset = Vector2.Zero,
             alignment = 9 // Set default alignment
         };
@@ -150,7 +111,6 @@ public class SpriteMeta
 {
 	public string name;
 	public Rect2 rect;
-	public Vector2 pivot;
     public Vector2 offset = new Vector2(0,0);
 	public int alignment;
 }
