@@ -1,5 +1,7 @@
-// meta-description: Custom Template
+// meta-name: Clean Object Template
+// meta-description: Cleaner Reformed Template
 // meta-default: true
+// meta-space-indent: 4
 public partial class _CLASS_ : _BASE_
 {
     // create()
