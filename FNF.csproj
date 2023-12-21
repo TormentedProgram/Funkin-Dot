@@ -6,8 +6,9 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="ENet-CSharp" Version="2.4.8" />
+    <PackageReference Include="ENet-CSharp" Version="2.4.8"/>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3"/>
-    <Compile Remove="art\**\*.cs" />
+    <PackageReference Include="NLua" Version="1.6.3"/>
+    <Compile Remove="art\**\*.cs"/>
   </ItemGroup>
 </Project>

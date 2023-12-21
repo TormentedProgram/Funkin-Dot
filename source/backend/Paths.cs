@@ -38,6 +38,10 @@ public partial class Paths : Node
 		return bitmap;
 	}
 
+	public static string scripts(string path) {	
+		return getPath($"scripts/{path}.lua",AssetType.TEXT);
+	}
+
 	public static string objects(string path) {
 		return getPath($"objects/{path}.tscn",AssetType.TEXT);
 	}

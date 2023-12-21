@@ -11,7 +11,7 @@ public class arrowClass {
 	public string noteType { get; set; }
 	
 	public bool mustPress { get; set; }
-	public float susLength { get; set; }
+	public float sustainLength { get; set; }
 
 	public arrowClass(float _strumTime, int _noteData, arrowClass _lastNote, bool _isSustain, string _noteType)
     {
@@ -61,21 +61,22 @@ public partial class Note : Node
                     oldNote = null;
                 }
 
-                Playfield field = gottaHitNote ? BFField : DadField;;
+                Playfield field = gottaHitNote ? BFField : DadField;
                 arrowClass swagNote = createNote(daStrumTime, daNoteData, oldNote, false, daNoteType);
                 swagNote.Sprite = field.createNoteObject() as Sprite2D;
                 swagNote.mustPress = gottaHitNote;
-                swagNote.susLength = songNotes.sustainLength;
+                swagNote.sustainLength = songNotes.sustainLength;
 
-                // Calculate and create sustain notes
-                /*float susLength = swagNote.sustainLength / Conductor.stepCrochet;
+                //Calculate and create sustain notes
+                float susLength = swagNote.sustainLength / Conductor.stepCrochet;
                 for (int susNote = 0; susNote < susLength; susNote++)
                 {
-                    oldNote = NoteManager.allNotes[(int)NoteManager.allNotes.Count - 1];
+                    oldNote = loadedNotes[(int)loadedNotes.Count - 1];
                     float susNoteTime = daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet;
-                    babyNote sustainNote = NoteManager.createNote(susNoteTime, daNoteData, oldNote, true, daField, daNoteType);
-                    sustainNote.mustPress = gottaHitNote;
-                }*/
+                    arrowClass swagSusNote = createNote(susNoteTime, daNoteData, oldNote, true, daNoteType);
+                    swagSusNote.Sprite = field.createNoteObject() as Sprite2D;
+                    swagSusNote.mustPress = gottaHitNote;
+                }
             }
         }  
 	}
