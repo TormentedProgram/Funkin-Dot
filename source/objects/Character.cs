@@ -34,7 +34,7 @@ public partial class Character : Sprite2D
     CharacterData character;
 	public SparrowAnimation animation;
 
-    Vector2 startingPosition;
+    public Vector2 startingPosition;
     float startingScale = 1;
 
     bool isPlayer = false;
@@ -45,7 +45,7 @@ public partial class Character : Sprite2D
         isPlayer = (bool)GetMeta("isPlayer");
 
         character = loadCharacter(characterName);
-        startingPosition = Position;
+        startingPosition = new Vector2(Position.X + character.position[0], Position.Y + character.position[1]);
 
         TextureFilter = character.no_antialiasing ? TextureFilterEnum.Nearest : TextureFilterEnum.Linear;
 

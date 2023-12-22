@@ -1,17 +1,19 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtsinu17qylsv"]
 
-[ext_resource type="PackedScene" uid="uid://d3025ksqygls" path="res://assets/objects/Character.tscn" id="1_n2ndd"]
-[ext_resource type="Texture2D" uid="uid://bx5kfq5d16rbm" path="res://assets/images/example.png" id="2_t37r2"]
-[ext_resource type="PackedScene" uid="uid://vjt5k7pcp62i" path="res://assets/objects/Playfield.tscn" id="3_boiai"]
+[ext_resource type="PackedScene" uid="uid://d3025ksqygls" path="res://export/assets/objects/Character.tscn" id="1_n2ndd"]
+[ext_resource type="Texture2D" uid="uid://bx5kfq5d16rbm" path="res://export/assets/images/example.png" id="2_t37r2"]
+[ext_resource type="PackedScene" uid="uid://vjt5k7pcp62i" path="res://export/assets/objects/Playfield.tscn" id="3_boiai"]
 [ext_resource type="Script" path="res://source/backend/LuaScripts.cs" id="4_eatol"]
-[ext_resource type="PackedScene" uid="uid://dcktwfejfyw4l" path="res://assets/objects/Scripts.tscn" id="4_lvksi"]
-[ext_resource type="FontFile" uid="uid://gjhpk4k4ldke" path="res://assets/fonts/vcr.ttf" id="4_ncedc"]
+[ext_resource type="PackedScene" uid="uid://dcktwfejfyw4l" path="res://export/assets/objects/Scripts.tscn" id="4_lvksi"]
+[ext_resource type="FontFile" uid="uid://gjhpk4k4ldke" path="res://export/assets/fonts/vcr.ttf" id="4_ncedc"]
 [ext_resource type="Script" path="res://source/objects/FPS.cs" id="4_qx5md"]
 
 [node name="Scene" type="Node2D"]
 
+[node name="Stage" type="Node2D" parent="."]
+
 [node name="Dad" parent="." instance=ExtResource("1_n2ndd")]
-position = Vector2(108, -16)
+position = Vector2(90, 105)
 texture = ExtResource("2_t37r2")
 centered = false
 region_rect = Rect2(0, 0, 128, 128)
@@ -19,7 +21,7 @@ metadata/CharacterName = "rei"
 metadata/isPlayer = false
 
 [node name="Boyfriend" parent="." instance=ExtResource("1_n2ndd")]
-position = Vector2(777, 317)
+position = Vector2(777, -29)
 texture = ExtResource("2_t37r2")
 centered = false
 flip_h = true

@@ -51,7 +51,7 @@ public partial class Paths : Node
 	}
 
 	public static AudioStream song(string path) {
-		return ResourceLoader.Load<AudioStream>(getPath($"songs/{path}.ogg",AssetType.TEXT));
+		return AudioStreamOggVorbis.LoadFromFile(getPath($"songs/{path}.ogg",AssetType.TEXT));
 	}
 
 	public static string atlas(string path) {
