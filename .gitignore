@@ -3,6 +3,7 @@
 
 # additional fnf stuff
 addons/
+export/
 
 # Godot-specific ignores
 .import/

@@ -23,7 +23,12 @@ public partial class SparrowAnimation : Node
     public void setpath(string path)
     {
         allRects = SparrowParser.ParseAsset(Paths.atlas(path));
-		GetParent<Sprite2D>().Texture = Paths.image(path);
+
+		Image image = new Image();
+        image.Load(checkExistLoc($"images/{path}.png"));
+        Texture2D asset = ImageTexture.CreateFromImage(image);
+
+		GetParent<Sprite2D>().Texture = asset;
     }
 
     public void create(string tag, string animName, float fps, bool loop)

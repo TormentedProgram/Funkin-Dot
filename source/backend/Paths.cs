@@ -50,6 +50,10 @@ public partial class Paths : Node
 		return getPath($"songs/{path}.json",AssetType.TEXT);
 	}
 
+	public static AudioStream song(string path) {
+		return ResourceLoader.Load<AudioStream>(getPath($"songs/{path}.ogg",AssetType.TEXT));
+	}
+
 	public static string atlas(string path) {
 		return getPath($"images/{path}",AssetType.ATLAS);
 	}

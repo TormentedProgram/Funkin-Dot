@@ -8,12 +8,11 @@ public class SparrowParser
     public static List<SpriteMeta> ParseAsset(string _path)
     {
         var formattedPath = formatPath(_path);
-        Texture2D asset = GD.Load(_path + ".png") as Texture2D;
 
         if (!File.Exists(formattedPath + ".xml"))
         {
             GD.PrintErr($"XML file not found: {formattedPath}.xml");
-            return loadDefault(asset);
+            return loadDefault();
         }
 
 		string xmlString = File.ReadAllText(formattedPath + ".xml");
@@ -69,14 +68,14 @@ public class SparrowParser
         return null;
     }
 
-    private static List<SpriteMeta> loadDefault(Texture2D texture)
+    private static List<SpriteMeta> loadDefault()
     {
         // You can define your default SpriteMeta here
-        Vector2 textureSize = texture.GetSize();
+
         SpriteMeta defaultSprite = new SpriteMeta
         {
             name = "DefaultSprite",
-            rect = new Rect2(Vector2.Zero, textureSize), // Set default dimensions
+            rect = new Rect2(Vector2.Zero, new Vector2(100,100)), // Set default dimensions
             offset = Vector2.Zero,
             alignment = 9 // Set default alignment
         };

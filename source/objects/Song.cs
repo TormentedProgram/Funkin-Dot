@@ -19,14 +19,14 @@ public partial class Song : Node
     {
 		string path = formatPath(_path);
 
-        if (!System.IO.File.Exists(path))
+        if (!File.Exists(path))
         {
             GD.PrintErr($"JSON file not found: {path}");
             //return loadDefault(asset);
             return null;
         }
 
-		string rawJson = System.IO.File.ReadAllText(path);
+		string rawJson = File.ReadAllText(path);
         rawJson = formatJson(rawJson);
         
         while (!rawJson.EndsWith("}"))

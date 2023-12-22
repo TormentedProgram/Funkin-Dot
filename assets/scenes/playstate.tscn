@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtsinu17qylsv"]
 
 [ext_resource type="PackedScene" uid="uid://d3025ksqygls" path="res://assets/objects/Character.tscn" id="1_n2ndd"]
-[ext_resource type="Texture2D" uid="uid://bx5kfq5d16rbm" path="res://assets/images/Example.png" id="2_t37r2"]
+[ext_resource type="Texture2D" uid="uid://bx5kfq5d16rbm" path="res://assets/images/example.png" id="2_t37r2"]
 [ext_resource type="PackedScene" uid="uid://vjt5k7pcp62i" path="res://assets/objects/Playfield.tscn" id="3_boiai"]
 [ext_resource type="Script" path="res://source/backend/LuaScripts.cs" id="4_eatol"]
 [ext_resource type="PackedScene" uid="uid://dcktwfejfyw4l" path="res://assets/objects/Scripts.tscn" id="4_lvksi"]
@@ -46,11 +46,13 @@ scale = Vector2(0.8, 0.8)
 
 [node name="FPSCounter" type="Label" parent="Main/camHUD"]
 layout_mode = 0
-offset_left = -631.0
-offset_top = -354.0
-offset_right = -574.0
-offset_bottom = -331.0
+offset_left = -636.0
+offset_top = -356.0
+offset_right = -579.0
+offset_bottom = -333.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.490196)
 theme_override_fonts/font = ExtResource("4_ncedc")
+theme_override_font_sizes/font_size = 16
 text = "FPS: 0"
 script = ExtResource("4_qx5md")
 
@@ -58,3 +60,7 @@ script = ExtResource("4_qx5md")
 script = ExtResource("4_eatol")
 
 [node name="Scripts" parent="." instance=ExtResource("4_lvksi")]
+
+[node name="Vocals" type="AudioStreamPlayer2D" parent="Scripts"]
+
+[node name="Inst" type="AudioStreamPlayer2D" parent="Scripts"]
