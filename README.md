@@ -24,4 +24,10 @@ IF YOU WANT TO CODE THE GAME YOURSELF, CONTINUE READING!!!
 3. Open Project in Godot 4.2.1 Mono
 4. Profit!!
 
+### Exporting The Build
+0. Download and Connect RCEdit(For Windows Icon) [OPTIONAL]
+1. Project>Export/>Export Project
+2. Install Windows Build Template
+3. Once Exported drag Assets folder from Engine to Export
+   
 You should have everything ready for working on the game!
