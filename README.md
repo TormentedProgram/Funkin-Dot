@@ -25,9 +25,9 @@ IF YOU WANT TO CODE THE GAME YOURSELF, CONTINUE READING!!!
 4. Profit!!
 
 ### Exporting The Build
-0. Download and Connect RCEdit(For Windows Icon) [OPTIONAL]
-1. Project>Export/>Export Project
+0. Download and Connect RCEdit [OPTIONAL]
+1. Project > Export > Export Project
 2. Install Windows Build Template
-3. Once Exported drag Assets folder from Engine to Export
+3. Once you've exported, drag the Assets folder from Engine to Export location
    
 You should have everything ready for working on the game!
