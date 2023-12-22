@@ -1,5 +1,8 @@
 # Dot Engine
 
+## HEAVY DISCLAIMER
+THIS ENGINE IS SO EARLY IN DEVELOPMENT IT DOESN'T EVEN HAVE NOTES WORKING.
+
 This is the repository for Friday Night Funkin: Dot Engine, an engine made to learn C#.
 
 Play the Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
