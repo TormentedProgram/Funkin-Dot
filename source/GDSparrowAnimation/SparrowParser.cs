@@ -1,7 +1,5 @@
-
-using System.Collections.Generic;
 using System.Xml;
-
+using System.Text;
 
 public class SparrowParser
 {
@@ -16,6 +14,13 @@ public class SparrowParser
         }
 
 		string xmlString = File.ReadAllText(formattedPath + ".xml");
+        
+        //thanks to Hans Passant, Amit Merin on stackoverflow 
+        string _byteOrderMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
+        if (xmlString.StartsWith(_byteOrderMarkUtf8, StringComparison.Ordinal))
+        {
+            xmlString = xmlString.Remove(0, _byteOrderMarkUtf8.Length);
+        }
 
         XmlDocument doc = new XmlDocument();
         doc.LoadXml(xmlString);
@@ -34,7 +39,7 @@ public class SparrowParser
 
             if (width < 0 || height < 0)
             {
-                GD.PrintErr($"Invalid dimensions detected for sprite '{name}' (width={width}, height={height}). Import has to be aborted. Please check the XML file content.");
+                GD.PrintErr($"Invalid dimensions detected for sprite '{name}' (width={width}, height={height}). Please check the XML file content.");
                 return null;
             }
 
