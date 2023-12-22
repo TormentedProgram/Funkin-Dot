@@ -47,6 +47,8 @@ public partial class Character : Sprite2D
         character = loadCharacter(characterName);
         startingPosition = Position;
 
+        TextureFilter = character.no_antialiasing ? TextureFilterEnum.Nearest : TextureFilterEnum.Linear;
+
         animation = GetNode<Node>("Animation") as SparrowAnimation;
 		animation.setpath(character.image);
 
