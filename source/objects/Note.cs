@@ -25,6 +25,7 @@ public class arrowClass {
 
 public partial class Note : Node
 {
+    private static List<string> corresDir = new List<string> { "purple", "blue", "green", "red" };
 	public static List<arrowClass> loadedNotes = new List<arrowClass>();
 
 	public static arrowClass createNote(float strumTime, int noteData, arrowClass lastNote, bool isSustain, string noteType) {
@@ -46,6 +47,9 @@ public partial class Note : Node
                 int daNoteData = (int)songNotes.noteData % 4;
                 bool gottaHitNote = section.mustHitSection;
 
+                if (daNoteData < 0) {
+                    continue;
+                }
                 if (songNotes.noteData % 8 > 3)
                 {
                     gottaHitNote = !gottaHitNote;
@@ -64,6 +68,16 @@ public partial class Note : Node
                 Playfield field = gottaHitNote ? BFField : DadField;
                 arrowClass swagNote = createNote(daStrumTime, daNoteData, oldNote, false, daNoteType);
                 swagNote.Sprite = field.createNoteObject() as Sprite2D;
+
+                SparrowAnimation noteAnim = swagNote.Sprite.GetNode<Node>("Animation") as SparrowAnimation;
+                noteAnim.setpath("NOTE_assets");
+
+                string color = corresDir[daNoteData];
+                noteAnim.create(daNoteData.ToString(), $"{color}0", 24, false);
+                noteAnim.centerOffsets();
+
+                swagNote.Sprite.Scale = new Vector2(1f, 1f);
+
                 swagNote.mustPress = gottaHitNote;
                 swagNote.sustainLength = songNotes.sustainLength;
 
@@ -74,8 +88,26 @@ public partial class Note : Node
                     oldNote = loadedNotes[(int)loadedNotes.Count - 1];
                     float susNoteTime = daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet;
                     arrowClass swagSusNote = createNote(susNoteTime, daNoteData, oldNote, true, daNoteType);
+
                     swagSusNote.Sprite = field.createNoteObject() as Sprite2D;
                     swagSusNote.mustPress = gottaHitNote;
+
+                    SparrowAnimation Sus_noteAnim = swagSusNote.Sprite.GetNode<Node>("Animation") as SparrowAnimation;
+                    Sus_noteAnim.setpath("NOTE_assets");
+
+                    Sus_noteAnim.create(daNoteData.ToString(), $"{color} hold end0", 24, false);
+
+                    float newYScale2 = swagSusNote.Sprite.Scale.Y * Conductor.stepCrochet/100 * 0.5f * SONG.speed;
+                    swagSusNote.Sprite.Scale = new Vector2(1f, newYScale2);
+
+                    if (oldNote.isSustain) {
+                        SparrowAnimation Sus_noteAnim2 = oldNote.Sprite.GetNode<Node>("Animation") as SparrowAnimation;
+                        Sus_noteAnim2.create(daNoteData.ToString(), $"{color} hold piece0", 24, false);
+                        float newYScale = 1f * Conductor.stepCrochet/100 * 1.5f * SONG.speed;
+                        oldNote.Sprite.Scale = new Vector2(1f, newYScale);
+                        Sus_noteAnim2.centerOffsets();
+                    }
+                    Sus_noteAnim.centerOffsets();
                 }
             }
         }  

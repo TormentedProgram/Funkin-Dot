@@ -13,7 +13,7 @@
 [node name="Stage" type="Node2D" parent="."]
 
 [node name="Dad" parent="." instance=ExtResource("1_n2ndd")]
-position = Vector2(90, 105)
+position = Vector2(-428, -408)
 texture = ExtResource("2_t37r2")
 centered = false
 region_rect = Rect2(0, 0, 128, 128)

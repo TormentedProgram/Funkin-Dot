@@ -1,78 +1,101 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
+			"loop": false,
+			"fps": 24,
 			"anim": "idle",
-			"fps": 24,
-			"name": "IDLE",
-			"indices": []
+			"indices": [],
+			"name": "idle"
 		},
 		{
-			"loop": false,
 			"offsets": [
-				6,
-				6
-			],
-			"anim": "singLEFT",
-			"fps": 24,
-			"name": "LEFT",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				-3,
-				-1
-			],
-			"anim": "singDOWN",
-			"fps": 24,
-			"name": "DOWN",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				10,
-				13
-			],
-			"anim": "singUP",
-			"fps": 24,
-			"name": "UP",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				15,
+				0,
 				0
 			],
-			"anim": "singRIGHT",
+			"loop": false,
 			"fps": 24,
-			"name": "RIGHT",
-			"indices": []
+			"anim": "singUP",
+			"indices": [],
+			"name": "up"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "left"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "right"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "down"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "laugh-alt",
+			"indices": [],
+			"name": "laughalt"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "laugh",
+			"loop": false,
+			"name": "laughnormal"
 		}
 	],
-	"no_antialiasing": false,
-	"image": "characters/Rei",
+	"no_antialiasing": true,
+	"image": "characters/GB_Phase2",
 	"position": [
-		0,
-		-130
+		238,
+		210
 	],
-	"healthicon": "rei",
+	"healthicon": "gb",
 	"flip_x": false,
 	"healthbar_colors": [
-		56,
-		65,
-		187
+		148,
+		148,
+		148
 	],
 	"camera_position": [
-		130,
-		160
+		-170,
+		-230
 	],
-	"sing_duration": 6.1,
-	"scale": 0.7
+	"sing_duration": 4,
+	"idleReturn": true,
+	"scale": 5.99999999999999
 }

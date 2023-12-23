@@ -70,7 +70,7 @@ public partial class Strumline : Node2D
 
 	public override void _Process(double delta)
     {
-        // Check if the "game_up" input is pressed
+        /* Check if the "game_up" input is pressed
         foreach (string action in InputMap.GetActions())
         {
             for (int i = 0; i <= 3; i++) {
@@ -85,6 +85,6 @@ public partial class Strumline : Node2D
                     }
                 }
             }
-		}
+		}*/
     }
 }

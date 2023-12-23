@@ -39,6 +39,12 @@ public partial class Character : Sprite2D
 
     bool isPlayer = false;
 
+    public bool isSinging = false;
+
+    float animDuration = 0;
+
+    private Timer returnToIdleTimer;
+
 	public override void _Ready()
 	{
         string characterName = (String)GetMeta("CharacterName");
@@ -56,6 +62,11 @@ public partial class Character : Sprite2D
             animation.create(json.anim, json.name, json.fps, json.loop);
         }
 
+        returnToIdleTimer = new Timer();
+        returnToIdleTimer.OneShot = true;
+        AddChild(returnToIdleTimer);
+
+        animDuration = (float)character.sing_duration;
         startingScale = Scale.X;
 
         FlipH = character.flip_x;
@@ -67,11 +78,32 @@ public partial class Character : Sprite2D
         playAnim("idle");
 	}
 
+    private async void returnToIdle()
+    {
+        if (returnToIdleTimer.IsStopped())
+        {
+            returnToIdleTimer.WaitTime = Conductor.stepCrochet * animDuration / 1000;
+            returnToIdleTimer.Start();
+
+            await ToSignal(returnToIdleTimer, "timeout");
+            isSinging = false;
+        }
+        else
+        {
+            returnToIdleTimer.Stop();
+            returnToIdleTimer.WaitTime = Conductor.stepCrochet * animDuration / 1000;
+            returnToIdleTimer.Start();
+        }
+    }
+
     public void playAnim(string anim) {
+        isSinging = true;
         CharacterAnimation animdata = getAnimationData(character, anim);
 
         Vector2 haxeOffsets = new Vector2(animdata.offsets[0], animdata.offsets[1]);
         animation.play(anim);
+
+        returnToIdle();
 
         haxeOffsets.X *= startingScale;
         haxeOffsets.Y *= startingScale;
@@ -89,46 +121,5 @@ public partial class Character : Sprite2D
     public static CharacterAnimation getAnimationData(CharacterData data, string anim) {
         CharacterAnimation animation = data.animations.Find(a => a.anim == anim);
         return animation;
-    }
-
-	public override void _Process(double delta)
-    {
-        // Check if the "game_up" input is pressed
-        foreach (string action in InputMap.GetActions())
-        {
-            switch (action)
-            {
-                case "game_up":
-                    if (Input.IsActionJustPressed(action))
-                    {
-                        playAnim("singUP");
-                    }
-                    break;
-
-                case "game_left":
-                    if (Input.IsActionJustPressed(action))
-                    {
-                        playAnim("singLEFT");
-                    }
-                    break;
-
-                case "game_down":
-                    if (Input.IsActionJustPressed(action))
-                    {
-                        playAnim("singDOWN");
-                    }
-                    break;
-
-                case "game_right":
-                    if (Input.IsActionJustPressed(action))
-                    {
-                        playAnim("singRIGHT");
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-		}
     }
 }

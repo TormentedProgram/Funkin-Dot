@@ -1,6 +1,7 @@
 public partial class Playfield : Node2D
 {
 	public Object createNoteObject() {
-		return loadObject(Paths.objects("Arrow"), GetNode<Node2D>("Notes"));
+		Object note = loadObject(Paths.objects("Arrow"), GetNode<Node2D>("Notes"));
+		return note;
 	}
 }

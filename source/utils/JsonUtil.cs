@@ -39,9 +39,9 @@ public partial class JsonUtil:Node
             JArray newSectionNotes = new JArray(sectionNotes.Select(note =>
                 noteshit = new JObject
                 {
-                    { "strumTime", note[0] },
-                    { "noteData", note[1] },
-                    { "sustainLength", note[2] },
+                    { "strumTime", (int)note[0] >= 0 ? note[0] : 0 },
+                    { "noteData", (int)note[1] >= 0 ? note[1] : -1},
+                    { "sustainLength", double.TryParse(note.Count() >= 3 && note[2] is string ? (string)note[2] : note[2]?.ToString(), out var parsedSustain) ? parsedSustain : 0 },
                     { "noteType" , note.Count() >= 4 ? note[3] : "default"}
                 }));
 
@@ -52,6 +52,7 @@ public partial class JsonUtil:Node
                 { "sectionNotes", newSectionNotes },
                 { "mustHitSection", section.Value<bool>("mustHitSection") }
             };
+            
             newNotesData.Add(newSection);
         }
         data["song"]["notes"] = newNotesData;

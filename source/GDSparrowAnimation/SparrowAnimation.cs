@@ -31,20 +31,36 @@ public partial class SparrowAnimation : Node
 		GetParent<Sprite2D>().Texture = asset;
     }
 
-    public void create(string tag, string animName, float fps, bool loop)
-    {
-        currentRects = allRects
-            .Where(spriteMeta => spriteMeta.name.Contains(animName))
-            .ToList();
+	public void create(string tag, string animName, float fps, bool loop)
+	{
+		// Check if the tag already exists in allData
+		DynamicAnimationData existingAnim = allData.FirstOrDefault(data => data.name == tag);
 
-        DynamicAnimationData newAnim = new DynamicAnimationData();
-        newAnim.name = tag;
-        newAnim.fps = fps;
-		newAnim.loop = loop;
-        newAnim.animRects = currentRects;
+		if (existingAnim != null)
+		{
+			// Update existing entry
+			existingAnim.fps = fps;
+			existingAnim.loop = loop;
+			existingAnim.animRects = allRects
+				.Where(spriteMeta => spriteMeta.name.Contains(animName))
+				.ToList();
+		}
+		else
+		{
+			// Create a new entry
+			List<SpriteMeta> currentRects = allRects
+				.Where(spriteMeta => spriteMeta.name.Contains(animName))
+				.ToList();
 
-        allData.Add(newAnim);
-    }
+			DynamicAnimationData newAnim = new DynamicAnimationData();
+			newAnim.name = tag;
+			newAnim.fps = fps;
+			newAnim.loop = loop;
+			newAnim.animRects = currentRects;
+
+			allData.Add(newAnim);
+		}
+	}
 
     public void centerOffsets() {
         foreach(DynamicAnimationData data in allData) {
@@ -78,7 +94,7 @@ public partial class SparrowAnimation : Node
 		}
 		else
 		{
-			GD.Print("Animation data not found for tag: " + tag);
+			//GD.Print("Animation data not found for tag: " + tag);
 		}
 	}
 

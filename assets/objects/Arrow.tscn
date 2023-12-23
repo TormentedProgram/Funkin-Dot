@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://cyawasbum5fnm"]
+[gd_scene load_steps=2 format=3 uid="uid://cyawasbum5fnm"]
+
+[ext_resource type="Script" path="res://source/GDSparrowAnimation/SparrowAnimation.cs" id="1_xgqs7"]
 
 [node name="Arrow" type="Sprite2D"]
 position = Vector2(580, 431)
+
+[node name="Animation" type="Node" parent="."]
+script = ExtResource("1_xgqs7")
